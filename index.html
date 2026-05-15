@@ -33,9 +33,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      padding: 2rem 1.5rem;
+      padding: 2rem 1.5rem 3rem;
       position: relative;
       overflow-x: hidden;
     }
@@ -93,7 +92,7 @@
 
     /* --- EMOJI --- */
     .hero-emoji {
-      font-size: clamp(4.5rem, 16vw, 8rem);
+      font-size: clamp(3rem, 10vw, 5rem);
       line-height: 1;
       display: block;
       margin-bottom: 1.5rem;
@@ -156,6 +155,10 @@
       font-style: italic;
     }
 
+    .card .highlights {
+      display: inline-block;
+      margin-top: 0.55rem;
+    }
     .card .highlight {
       display: inline-flex;
       align-items: center;
@@ -184,7 +187,7 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       transition: background 0.2s, transform 0.15s;
-      margin-bottom: 3rem;
+      margin-bottom: 0;
       animation: fadeUp 0.7s ease 0.65s both;
     }
     .news-link:hover {
@@ -194,6 +197,56 @@
     .news-link svg {
       flex-shrink: 0;
       opacity: 0.7;
+    }
+
+    /* --- ARTICLE PREVIEW --- */
+    .article-preview {
+      display: block;
+      border: 1.5px solid #E8DFD0;
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      margin-top: 1.25rem;
+      margin-bottom: 1rem;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .article-preview:hover {
+      box-shadow: 0 4px 20px rgba(26,18,8,0.1);
+      transform: translateY(-1px);
+    }
+    .article-preview img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .article-preview-body {
+      padding: 0.75rem 1rem;
+      background: #FDFAF6;
+    }
+    .article-preview-source {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-bottom: 0.3rem;
+    }
+    .article-preview-title {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+    .article-preview-desc {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 300;
+      line-height: 1.5;
+      color: #6B5E4A;
     }
 
     /* --- DIVIDER --- */
@@ -278,7 +331,7 @@
     footer {
       position: relative;
       z-index: 1;
-      margin-top: 3.5rem;
+      margin-top: 2rem;
       font-family: var(--mono);
       font-size: 0.68rem;
       color: #B0A090;
@@ -323,27 +376,28 @@
 
   <span class="hero-emoji">🎉</span>
 
-  <h1>Yes, <em>still</em><br>employed.</h1>
-  <p class="subtitle">is-miranda-employed.space — last verified: right now</p>
+  <h1>Yes, <em>still</em> employed.</h1>
+  <p class="subtitle">is-miranda-employed.space — last verified: 5/15/2026</p>
 
   <div class="card">
     <p>
-      Hello, concerned friends and family! 👋
+      Hello, concerned friends and family! 👋 You are probably here because you've seen news about Meta layoffs.
     </p>
     <p>
-      I still have a job, but I got moved off my previous team (the Oculus Store) onto a new team called the <strong>Applied AI (AAI) Engineering unit</strong>. <span class="highlight">✓ new team</span> <span class="highlight">✓ still employed</span>
+      I still have a job, but I got moved off my previous team (the Oculus Store) onto a new team called the <strong>Applied AI (AAI) Engineering unit</strong>.<br><span class="highlights"><span class="highlight">✓ new team</span> <span class="highlight">✓ still employed</span></span>
     </p>
     <p>
       Not completely sure how I feel about working on Meta's AI... what do you think? You can read about it in the Reuters article below.
     </p>
+    <a class="article-preview" href="https://www.reuters.com/technology/meta-transfers-top-engineers-into-new-ai-tooling-team-2026-04-09/" target="_blank" rel="noopener">
+      <img src="reuters-image.avif" alt="Meta transfers top engineers into new AI tooling team" />
+      <div class="article-preview-body">
+        <p class="article-preview-source">Reuters &nbsp;·&nbsp; Apr 9, 2026 &nbsp;·&nbsp; Katie Paul &amp; Jeff Horwitz</p>
+        <p class="article-preview-title">Meta transfers top engineers into new AI tooling team</p>
+        <p class="article-preview-desc">Meta is drafting top software engineers from across the company into a new AI engineering organization created last month, according to an internal memo seen by Reuters, part of a reorganization of its workforce in preparation for layoffs.</p>
+      </div>
+    </a>
   </div>
-
-  <a class="news-link" href="https://www.reuters.com/technology/meta-transfers-top-engineers-into-new-ai-tooling-team-2026-04-09/" target="_blank" rel="noopener">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-    </svg>
-    Reuters — Meta's New AI Tooling Team
-  </a>
 
   <div class="divider"></div>
 
