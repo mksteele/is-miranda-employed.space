@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>is-Miranda-employed.space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF6EF;
+      --ink: #1A1208;
+      --green: #2D6A4F;
+      --green-light: #52B788;
+      --green-pale: #D8F3DC;
+      --amber: #E9A800;
+      --red-soft: #C44B2B;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grid texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(45,106,79,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45,106,79,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* --- STATUS BADGE --- */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green-pale);
+      border: 1.5px solid var(--green-light);
+      border-radius: 2rem;
+      padding: 0.35rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      animation: fadeDown 0.6s ease both;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green-light);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* --- EMOJI --- */
+    .hero-emoji {
+      font-size: clamp(4.5rem, 16vw, 8rem);
+      line-height: 1;
+      display: block;
+      margin-bottom: 1.5rem;
+      animation: emojiPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+      filter: drop-shadow(0 8px 24px rgba(45,106,79,0.15));
+    }
+    @keyframes emojiPop {
+      from { transform: scale(0.3) rotate(-15deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    /* --- HEADLINE --- */
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.7s ease 0.35s both;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: #6B5E4A;
+      letter-spacing: 0.04em;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s ease 0.45s both;
+    }
+
+    /* --- EXPLANATION CARD --- */
+    .card {
+      background: white;
+      border: 1.5px solid #E8DFD0;
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      text-align: left;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease 0.55s both;
+      box-shadow: 0 2px 20px rgba(26,18,8,0.05);
+    }
+
+    .card p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #3A2E20;
+      margin-bottom: 1rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
+
+    .card strong {
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .card .highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green-pale);
+      color: var(--green);
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    /* --- NEWS LINK --- */
+    .news-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.85rem 1.6rem;
+      border-radius: 10px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.15s;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.7s ease 0.65s both;
+    }
+    .news-link:hover {
+      background: var(--green);
+      transform: translateY(-2px);
+    }
+    .news-link svg {
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    /* --- DIVIDER --- */
+    .divider {
+      width: 48px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #C9BAA8, transparent);
+      margin: 0 auto 2rem;
+      animation: fadeUp 0.7s ease 0.7s both;
+    }
+
+    /* --- VISITOR COUNTER --- */
+    .counter-section {
+      animation: fadeUp 0.7s ease 0.75s both;
+    }
+    .counter-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-bottom: 0.6rem;
+    }
+    .counter-display {
+      display: inline-flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+    .counter-digit {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 500;
+      width: 2.1rem;
+      height: 2.8rem;
+      line-height: 2.8rem;
+      text-align: center;
+      border-radius: 6px;
+      letter-spacing: 0;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .counter-digit.pop {
+      animation: digitPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes digitPop {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.25) translateY(-3px); }
+      100% { transform: scale(1); }
+    }
+    .counter-sep {
+      font-family: var(--mono);
+      font-size: 1.4rem;
+      color: #C9BAA8;
+      line-height: 2.8rem;
+      margin: 0 0.1rem;
+    }
+    .counter-note {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: #B0A090;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* --- YOU ARE BANNER --- */
+    .you-are-banner {
+      display: none;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--amber);
+      letter-spacing: 0.06em;
+      animation: fadeIn 1s ease 1.5s both;
+    }
+    .you-are-banner.show { display: block; }
+
+    /* --- FOOTER --- */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 3.5rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: #B0A090;
+      letter-spacing: 0.05em;
+      animation: fadeUp 0.7s ease 0.85s both;
+      text-align: center;
+    }
+    footer a {
+      color: #9A8878;
+      text-decoration: underline;
+      text-decoration-color: #C9BAA8;
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 1.25rem 1.25rem; }
+      h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    <span>Status: actively employed</span>
+  </div>
+
+  <span class="hero-emoji">🎉</span>
+
+  <h1>Yes, <em>still</em><br>employed.</h1>
+  <p class="subtitle">is-miranda-employed.space — last verified: right now</p>
+
+  <div class="card">
+    <p>
+      Hello, concerned friends and family! 👋 I know you saw headlines about Meta layoffs and immediately started drafting a "you ok??" text.
+    </p>
+    <p>
+      I appreciate the love — but I'm fine. In April, Meta stood up a new team called the <strong>Applied AI (AAI) Engineering unit</strong> and moved a group of engineers into it, myself included. <span class="highlight">✓ new team</span> <span class="highlight">✓ still employed</span>
+    </p>
+    <p>
+      You can read about it in the Reuters article below. Please redirect your worry toward whether I'm getting enough sleep. (I'm not. I have a baby.)
+    </p>
+  </div>
+
+  <a class="news-link" href="https://www.reuters.com/technology/meta-transfers-top-engineers-into-new-ai-tooling-team-2026-04-09/" target="_blank" rel="noopener">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+    </svg>
+    Reuters — Meta's New AI Tooling Team
+  </a>
+
+  <div class="divider"></div>
+
+  <div class="counter-section">
+    <p class="counter-label">unique visitors who needed proof</p>
+    <div class="counter-display" id="counterDisplay"></div>
+    <p class="counter-note" id="counterNote"></p>
+    <p class="you-are-banner" id="youAreBanner">← you are visitor #<span id="yourNumber"></span></p>
+  </div>
+
+</div>
+
+<footer>
+  made with love (and mild exasperation) &nbsp;·&nbsp; is-miranda-employed.space &nbsp;·&nbsp;
+  <a href="https://www.reuters.com/technology/meta-transfers-top-engineers-into-new-ai-tooling-team-2026-04-09/" target="_blank" rel="noopener">source</a>
+</footer>
+
+<script>
+  // Unique visitor counter using localStorage
+  // In production you'd use a real backend (e.g. Cloudflare Workers KV, Supabase, etc.)
+  // This demo persists per-browser and shows what the UI looks like.
+
+  const STORAGE_KEY = 'miranda_employed_visitor';
+  const COUNT_KEY   = 'miranda_employed_count';
+
+  function getCount() {
+    const raw = localStorage.getItem(COUNT_KEY);
+    return raw ? parseInt(raw, 10) : 127; // seed with a fun starting number
+  }
+
+  function setCount(n) {
+    localStorage.setItem(COUNT_KEY, String(n));
+  }
+
+  function isNewVisitor() {
+    return !localStorage.getItem(STORAGE_KEY);
+  }
+
+  function markVisitor(n) {
+    localStorage.setItem(STORAGE_KEY, String(n));
+  }
+
+  function getMyNumber() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? parseInt(raw, 10) : null;
+  }
+
+  function renderCounter(n, animate) {
+    const display = document.getElementById('counterDisplay');
+    const digits = String(n).padStart(5, '0').split('');
+    display.innerHTML = '';
+    digits.forEach((d, i) => {
+      if (i === 2) {
+        const sep = document.createElement('span');
+        sep.className = 'counter-sep';
+        sep.textContent = ',';
+        display.appendChild(sep);
+      }
+      const span = document.createElement('span');
+      span.className = 'counter-digit';
+      span.textContent = d;
+      if (animate) {
+        span.style.animationDelay = (i * 60) + 'ms';
+        setTimeout(() => span.classList.add('pop'), i * 60);
+      }
+      display.appendChild(span);
+    });
+  }
+
+  (function init() {
+    let count = getCount();
+    const fresh = isNewVisitor();
+
+    if (fresh) {
+      count++;
+      setCount(count);
+      markVisitor(count);
+    }
+
+    renderCounter(count, true);
+
+    const note = document.getElementById('counterNote');
+    const myN  = getMyNumber();
+
+    if (fresh) {
+      note.textContent = 'you just incremented this 🙈';
+      const banner = document.getElementById('youAreBanner');
+      document.getElementById('yourNumber').textContent = myN;
+      setTimeout(() => banner.classList.add('show'), 1200);
+    } else {
+      note.textContent = `you've been here before (visitor #${myN})`;
+    }
+  })();
+</script>
+
+</body>
+</html>
